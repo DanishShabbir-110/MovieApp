@@ -1,4 +1,4 @@
-package com.danish.home_api.domain.model
+package com.danish.domain.model
 
 data class Movie(
     val id: Int,

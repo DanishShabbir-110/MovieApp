@@ -1,6 +1,6 @@
-package com.danish.home_api.domain.repository
+package com.danish.domain.repository
 
-import com.danish.home_api.domain.model.Movie
+import com.danish.domain.model.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
