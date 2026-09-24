@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.secrets.plugin)
 }
 
 android {
@@ -17,7 +18,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures{
+        buildConfig=true
+    }
+}
 
+secrets {
+    propertiesFileName = "secrets.properties"
 }
 
 dependencies {
@@ -39,4 +46,10 @@ dependencies {
 
     //Koin
     implementation(libs.koin.android)
+
+    //Serializable
+    implementation(libs.kotlinx.serialization.json)
+
+    //Paging 3
+    implementation(libs.androidx.paging.common)
 }

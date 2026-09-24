@@ -27,4 +27,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    //paging 3
+    implementation(libs.androidx.paging.common)
 }

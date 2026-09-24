@@ -31,4 +31,7 @@ dependencies {
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.convert.gson)
+
+    //Paging 3
+    implementation(libs.androidx.paging.compose)
 }

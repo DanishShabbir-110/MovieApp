@@ -29,6 +29,7 @@ foundationLayout = "1.11.3"
 uiText = "1.11.3"
 uiGraphics = "1.11.3"
 secretsPlugin = "2.0.1"
+paging = "3.3.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -70,6 +71,9 @@ androidx-compose-runtime-saveable = { group = "androidx.compose.runtime", name =
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
 androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
+androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
