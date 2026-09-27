@@ -1,21 +1,24 @@
-package com.danish.home_impl.presentation.screens.home.components
+package com.danish.home_impl.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.danish.domain.model.Movie
 import com.danish.shared.components.MovieCard
 
-private const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500"
+private const val POSTER_BASE_URL =
+    "https://image.tmdb.org/t/p/w500"
 
 @Composable
 fun MovieSection(
@@ -29,31 +32,32 @@ fun MovieSection(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
+
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge,
+            color = Color.White,
+            fontSize = 17.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 14.dp)
         )
 
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                horizontal = 16.dp
-            )
+                .padding(top = 10.dp),
+            contentPadding = PaddingValues(horizontal = 14.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+
             items(
                 items = movies,
-                key = { movie -> movie.id }
+                key = { it.id }
             ) { movie ->
 
                 MovieCard(
                     title = movie.title,
-                    posterUrl = movie.posterPath?.let { path ->
-                        "$POSTER_BASE_URL$path"
+                    posterUrl = movie.posterPath?.let {
+                        "$POSTER_BASE_URL$it"
                     },
                     rating = movie.rating,
                     onClick = {

@@ -54,7 +54,14 @@ dependencies {
 
     //Koin
     implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     //Modules
     implementation(project(":core:di"))
+    implementation(project(":core:navigation"))
+    implementation(project(":feature:home:home-api"))
+
+    // Navigation 3
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
 }

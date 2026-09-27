@@ -30,7 +30,7 @@ uiText = "1.11.3"
 uiGraphics = "1.11.3"
 secretsPlugin = "2.0.1"
 paging = "3.3.6"
-coil = "3.6.1"
+coil = "3.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

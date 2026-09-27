@@ -1,6 +1,7 @@
-package com.danish.home_impl.presentation.screens.home.components
+package com.danish.home_impl.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,7 +25,7 @@ fun PopularMovieSection(
     onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    androidx.compose.foundation.layout.Column(
+    Column(
         modifier = modifier.fillMaxWidth()
     ) {
         Text(

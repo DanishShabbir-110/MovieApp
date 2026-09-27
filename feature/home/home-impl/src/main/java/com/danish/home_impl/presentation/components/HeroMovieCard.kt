@@ -1,8 +1,8 @@
-package com.danish.home_impl.presentation.screens.home.components
+package com.danish.home_impl.presentation.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,8 +22,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 
+private val RatingYellow = Color(0xFFFFC107)
+
+@SuppressLint("DefaultLocale")
 @Composable
 fun HeroMovieCard(
     title: String,
@@ -37,10 +40,11 @@ fun HeroMovieCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(230.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .height(215.dp)
+            .clip(RoundedCornerShape(10.dp))
             .clickable(onClick = onClick)
     ) {
+
         AsyncImage(
             model = backdropUrl,
             contentDescription = title,
@@ -53,10 +57,9 @@ fun HeroMovieCard(
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black.copy(alpha = 0.85f)
-                        )
+                        0.25f to Color.Transparent,
+                        0.62f to Color.Black.copy(alpha = 0.20f),
+                        1f to Color.Black.copy(alpha = 0.95f)
                     )
                 )
         )
@@ -64,33 +67,48 @@ fun HeroMovieCard(
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(16.dp)
+                .padding(
+                    start = 12.dp,
+                    end = 12.dp,
+                    bottom = 12.dp
+                )
         ) {
+
             Text(
                 text = title,
                 color = Color.White,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
+                fontSize = 19.sp,
+                lineHeight = 22.sp,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
 
             Row(
-                modifier = Modifier.padding(top = 6.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = 5.dp)
             ) {
                 Text(
-                    text = "★ %.1f".format(rating),
+                    text = "★",
+                    color = RatingYellow,
+                    fontSize = 13.sp
+                )
+
+                Text(
+                    text = String.format(" %.1f", rating),
                     color = Color.White,
-                    style = MaterialTheme.typography.bodySmall
+                    fontSize = 12.sp
                 )
             }
 
             Text(
                 text = overview,
-                color = Color.White.copy(alpha = 0.8f),
-                style = MaterialTheme.typography.bodySmall,
+                color = Color.White.copy(alpha = 0.85f),
+                fontSize = 11.sp,
+                lineHeight = 14.sp,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = 5.dp)
             )
         }
     }

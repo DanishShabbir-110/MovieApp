@@ -34,4 +34,5 @@ dependencies {
     //Modules
     implementation(project(":core:network"))
     implementation(project(":data"))
+    implementation(project(":feature:home:home-impl"))
 }

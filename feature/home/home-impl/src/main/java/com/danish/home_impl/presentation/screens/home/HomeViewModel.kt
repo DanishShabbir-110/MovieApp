@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: MovieRepository) :
-    BaseViewModel<State, Effect, Event>(State()) {
+    BaseViewModel<HomeState, HomeEffect, HomeEvent>(HomeState()) {
 
     val popularMovies=repository.getPopularMovies().cachedIn(viewModelScope)
     init {
@@ -43,26 +43,26 @@ class HomeViewModel(private val repository: MovieRepository) :
         }
     }
 
-    override fun onEvent(event: Event) {
+    override fun onEvent(event: HomeEvent) {
         when(event){
-            is Event.MovieClicked ->{
+            is HomeEvent.MovieClicked ->{
 
             }
-            Event.RetryTrending -> getTrendingMovies()
+            HomeEvent.RetryTrending -> getTrendingMovies()
         }
     }
 
 }
 
-data class State(
+data class HomeState(
     override val isLoading: Boolean = false,
     override val errorMessage: String? = null,
     val trendingMovies: List<Movie> = emptyList()
 ) : BaseStates
 
-sealed interface Event : BaseEvents {
-    data class MovieClicked(val movieId: Int) : Event
-    data object RetryTrending : Event
+sealed interface HomeEvent : BaseEvents {
+    data class MovieClicked(val movieId: Int) : HomeEvent
+    data object RetryTrending : HomeEvent
 }
 
-sealed interface Effect : BaseEffects
+sealed interface HomeEffect : BaseEffects
