@@ -1,39 +1,49 @@
 package com.danish.home_impl.presentation.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.LazyPagingItems
+import com.danish.domain.model.Movie
 import com.danish.home_impl.presentation.components.HeroCarousel
 import com.danish.home_impl.presentation.components.HomeHeader
 import com.danish.home_impl.presentation.components.MovieSection
 import com.danish.home_impl.presentation.components.PopularMovieSection
 import com.danish.navigation.Navigator
+import com.danish.shared.base.BaseEffectsOfBaseViewModel
 import com.danish.shared.base.BaseScreen
+import kotlinx.coroutines.flow.Flow
+
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel,
-    navigator: Navigator,
+    state: HomeState,
+    popularMovies: LazyPagingItems<Movie>,
+    effects: Flow<HomeEffect>,
+    baseEffects: Flow<BaseEffectsOfBaseViewModel>,
+    onEvent: (HomeEvent) -> Unit,
+    navigator: Navigator
 ) {
-    val popularMovies = viewModel.popularMovies.collectAsLazyPagingItems()
-
     BaseScreen(
-        viewModel = viewModel,
+        state = state,
+        effects = effects,
+        baseEffects = baseEffects,
+        onEvent = onEvent,
         navigator = navigator
-    ) { paddingValues, state, onEvent ->
+    ) { state, onEvent ->
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
+            modifier = Modifier.fillMaxSize().statusBarsPadding().background(Color(0xFF080D12)),
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
-            item { HomeHeader() }
+            item {
+                HomeHeader()
+            }
             item {
                 HeroCarousel(
                     movies = state.trendingMovies,
@@ -46,7 +56,7 @@ fun HomeScreen(
                 MovieSection(
                     title = "Trending Now",
                     movies = state.trendingMovies,
-                    onMovieClick = {movieId ->
+                    onMovieClick = { movieId ->
                         onEvent(HomeEvent.MovieClicked(movieId))
                     }
                 )
@@ -54,7 +64,7 @@ fun HomeScreen(
             item {
                 PopularMovieSection(
                     movies = popularMovies,
-                    onMovieClick = {movieId ->
+                    onMovieClick = { movieId ->
                         onEvent(HomeEvent.MovieClicked(movieId))
                     }
                 )

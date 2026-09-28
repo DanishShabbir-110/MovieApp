@@ -5,17 +5,18 @@ import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.danish.home_api.HomeFeatureApi
+import com.danish.main_api.MainFeatureApi
 import com.danish.navigation.Navigator
 import org.koin.compose.koinInject
 
 @Composable
 fun AppNavigation() {
-    val homeFeatureApi: HomeFeatureApi = koinInject()
+    val mainFeatureApi: MainFeatureApi = koinInject()
     val navigator = remember {
-        Navigator(homeFeatureApi.homeEntry())
+        Navigator(mainFeatureApi.mainEntry())
     }
     val entryProvider = entryProvider {
-        homeFeatureApi.entryProvider(navigator, this)
+        mainFeatureApi.entryProvider(navigator, this)
     }
 
     NavDisplay(

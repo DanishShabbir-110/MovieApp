@@ -3,12 +3,14 @@ package com.danish.di
 import com.danish.data.di.dataModule
 import com.danish.home_impl.di.homeModule
 import com.danish.network.di.networkModule
+import com.example.main_impl.di.mainModule
 import org.koin.dsl.module
 
 val appModules = module {
     includes(
         networkModule,
         dataModule,
-        homeModule
+        homeModule,
+        mainModule
     )
 }

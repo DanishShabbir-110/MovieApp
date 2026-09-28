@@ -29,7 +29,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
 
     //Modules
-    implementation(project(":core:navigation"))
+    implementation(projects.core.navigation)
 
     // Navigation 3
     implementation(libs.navigation3.runtime)

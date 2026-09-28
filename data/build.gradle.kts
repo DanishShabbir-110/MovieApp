@@ -36,8 +36,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
 
     //Modules
-    implementation(project(":domain"))
-    implementation(project(":core:network"))
+    implementation(projects.domain)
+    implementation(projects.core.network)
 
     // Retrofit
     implementation(libs.retrofit)

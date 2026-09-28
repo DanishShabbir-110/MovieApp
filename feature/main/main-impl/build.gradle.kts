@@ -53,9 +53,13 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
 
     //Modules
-    implementation(project(":feature:main:main-api"))
-    implementation(project(":core:navigation"))
-    implementation(project(":feature:home:home-api"))
-    implementation(project(":feature:home:home-impl"))
+    implementation(projects.feature.main.mainApi)
+    implementation(projects.core.navigation)
+    implementation(projects.core.shared)
+    implementation(projects.feature.home.homeApi)
+    implementation(projects.domain)
+
+    //Paging 3
+    implementation(libs.androidx.paging.compose)
 
 }

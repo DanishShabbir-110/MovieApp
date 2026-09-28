@@ -14,6 +14,6 @@ class MainFeatureApiImpl: MainFeatureApi {
         navigator: Navigator,
         provider: EntryProviderScope<NavKey>
     ) {
-        TODO("Not yet implemented")
+        provider.addMainScreen(navigator)
     }
 }

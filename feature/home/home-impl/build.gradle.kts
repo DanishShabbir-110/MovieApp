@@ -43,10 +43,10 @@ dependencies {
     implementation(libs.navigation3.runtime)
 
     //Modules
-    implementation(project(":feature:home:home-api"))
-    implementation(project(":core:navigation"))
-    implementation(project(":core:shared"))
-    implementation(project(":domain"))
+    implementation(projects.feature.home.homeApi)
+    implementation(projects.core.navigation)
+    implementation(projects.core.shared)
+    implementation(projects.domain)
 
     // Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)

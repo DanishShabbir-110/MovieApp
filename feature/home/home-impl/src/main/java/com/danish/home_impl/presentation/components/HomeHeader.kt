@@ -31,7 +31,7 @@ fun HomeHeader() {
             .padding(
                 start = 14.dp,
                 end = 14.dp,
-                top = 4.dp
+                top = 8.dp
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -48,14 +48,14 @@ fun HomeHeader() {
         Text(
             text = "Cine",
             color = Color.White,
-            fontSize = 20.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
 
         Text(
             text = "Hub",
             color = CineHubRed,
-            fontSize = 20.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
     }

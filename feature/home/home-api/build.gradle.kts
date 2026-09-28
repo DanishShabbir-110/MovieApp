@@ -35,5 +35,5 @@ dependencies {
     implementation(libs.navigation3.runtime)
 
     //Modules
-    implementation(project(":core:navigation"))
+    implementation(projects.core.navigation)
 }

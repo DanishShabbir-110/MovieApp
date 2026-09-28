@@ -57,9 +57,10 @@ dependencies {
     implementation(libs.koin.androidx.compose)
 
     //Modules
-    implementation(project(":core:di"))
-    implementation(project(":core:navigation"))
-    implementation(project(":feature:home:home-api"))
+    implementation(projects.core.di)
+    implementation(projects.core.navigation)
+    implementation(projects.feature.home.homeApi)
+    implementation(projects.feature.main.mainApi)
 
     // Navigation 3
     implementation(libs.navigation3.runtime)

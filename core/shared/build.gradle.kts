@@ -50,5 +50,5 @@ dependencies {
 
 
     //Modules
-    implementation(project(":core:navigation"))
+    implementation(projects.core.navigation)
 }

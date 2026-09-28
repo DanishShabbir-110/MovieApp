@@ -32,7 +32,8 @@ dependencies {
     implementation(libs.koin.android)
 
     //Modules
-    implementation(project(":core:network"))
-    implementation(project(":data"))
-    implementation(project(":feature:home:home-impl"))
+    implementation(projects.core.network)
+    implementation(projects.data)
+    implementation(projects.feature.home.homeImpl)
+    implementation(projects.feature.main.mainImpl)
 }
