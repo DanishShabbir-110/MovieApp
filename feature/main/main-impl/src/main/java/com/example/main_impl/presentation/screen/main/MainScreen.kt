@@ -8,11 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +16,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.danish.home_api.HomeFeatureApi
 import com.danish.navigation.Navigator
+import com.danish.search_api.SearchFeatureApi
 import com.example.main_impl.presentation.BottomNavBar
 import com.example.main_impl.presentation.BottomNavItem
 import org.koin.compose.koinInject
@@ -27,11 +24,41 @@ import org.koin.compose.koinInject
 @Composable
 fun MainScreen() {
     val homeFeatureApi: HomeFeatureApi = koinInject()
-    var selectedItem by rememberSaveable { mutableStateOf(BottomNavItem.HOME) }
+    val searchFeatureApi: SearchFeatureApi = koinInject()
 
-    val tabNavigator = remember { Navigator(navKey = homeFeatureApi.homeEntry()) }
-    val tabEntryProvider = entryProvider {
-        homeFeatureApi.entryProvider(navigator = tabNavigator, provider = this)
+    val homeEntry = remember(homeFeatureApi) {
+        homeFeatureApi.homeEntry()
+    }
+
+    val searchEntry = remember(searchFeatureApi) {
+        searchFeatureApi.searchEntry()
+    }
+
+    val tabNavigator = remember(homeEntry) {
+        Navigator(navKey = homeEntry)
+    }
+
+    val tabEntryProvider = remember(
+        homeFeatureApi,
+        searchFeatureApi,
+        tabNavigator
+    ) {
+        entryProvider {
+            homeFeatureApi.entryProvider(
+                navigator = tabNavigator,
+                provider = this
+            )
+
+            searchFeatureApi.entryProvider(
+                navigator = tabNavigator,
+                provider = this
+            )
+        }
+    }
+
+    val selectedItem = when (tabNavigator.backStack.lastOrNull()) {
+        searchEntry -> BottomNavItem.SEARCH
+        else -> BottomNavItem.HOME
     }
 
     Scaffold(
@@ -46,13 +73,21 @@ fun MainScreen() {
                 BottomNavBar(
                     selectedItem = selectedItem,
                     onItemClick = { item ->
-                        if (item == selectedItem) {
-                            return@BottomNavBar
-                        }
-                        selectedItem = item
                         when (item) {
-                            BottomNavItem.HOME -> tabNavigator.navigateTo(homeFeatureApi.homeEntry())
-                            BottomNavItem.SEARCH -> {}
+                            BottomNavItem.HOME -> {
+                                if (selectedItem != BottomNavItem.HOME) {
+                                    tabNavigator.navigateAndPopTo(
+                                        key = homeEntry,
+                                        inclusive = false
+                                    )
+                                }
+                            }
+
+                            BottomNavItem.SEARCH -> {
+                                if (selectedItem != BottomNavItem.SEARCH) {
+                                    tabNavigator.navigateTo(searchEntry)
+                                }
+                            }
                         }
                     }
                 )
@@ -60,6 +95,7 @@ fun MainScreen() {
         },
         containerColor = Color.Transparent
     ) { innerPadding ->
+
         Box(
             modifier = Modifier
                 .fillMaxSize()

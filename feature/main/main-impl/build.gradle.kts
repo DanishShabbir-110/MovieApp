@@ -58,6 +58,7 @@ dependencies {
     implementation(projects.core.shared)
     implementation(projects.feature.home.homeApi)
     implementation(projects.domain)
+    implementation(projects.feature.search.searchApi)
 
     //Paging 3
     implementation(libs.androidx.paging.compose)

@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.danish.data.paging.PopularMoviesPagingSource
+import com.danish.data.paging.SearchMoviesPagingSource
 import com.danish.data.remote.api.MovieApi
 import com.danish.data.remote.dto.toDomain
 import com.danish.domain.model.Movie
@@ -36,6 +37,23 @@ class MovieRepositoryImpl(
             }
         ).flow
     }
+
+    override fun searchMovies(query: String): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                SearchMoviesPagingSource(
+                    movieApi = movieApi,
+                    apiKey = apiKey,
+                    query = query
+                )
+            }
+        ).flow
+    }
+
     private companion object {
         const val PAGE_SIZE = 20
     }

@@ -36,4 +36,5 @@ dependencies {
     implementation(projects.data)
     implementation(projects.feature.home.homeImpl)
     implementation(projects.feature.main.mainImpl)
+    implementation(projects.feature.search.searchImpl)
 }

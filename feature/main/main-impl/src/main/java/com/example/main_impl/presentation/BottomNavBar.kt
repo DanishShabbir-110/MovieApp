@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -56,7 +57,6 @@ enum class BottomNavItem(
 
 private val CineHubRed = Color(0xFFE63946)
 private val BarBackground = Color(0xCC111318)
-private val UnselectedBackground = Color(0x991D2128)
 private val UnselectedIcon = Color(0xFF9CA3AD)
 
 @Composable
@@ -71,7 +71,7 @@ fun BottomNavBar(
     ) {
         Surface(
             shape = RoundedCornerShape(32.dp),
-//            border = BorderStroke(width = 1.dp, color = CineHubRed.copy(alpha = 0.35f)),
+            border = BorderStroke(width = 1.dp, color = CineHubRed.copy(alpha = 0.35f)),
             color = BarBackground
         ) {
             Row(
@@ -172,3 +172,34 @@ private fun BottomBarItem(
         }
     }
 }
+
+//@Composable
+//private fun BottomBarItem(
+//    item: BottomNavItem,
+//    selected: Boolean,
+//    onClick: () -> Unit
+//) {
+//    Row(
+//        modifier = Modifier
+//            .height(52.dp)
+//            .clickable(onClick = onClick)
+//            .padding(horizontal = 16.dp),
+//        verticalAlignment = Alignment.CenterVertically,
+//        horizontalArrangement = Arrangement.Center
+//    ) {
+//        Icon(
+//            imageVector = if (selected) {
+//                item.selectedIcon
+//            } else {
+//                item.unSelectedIcon
+//            },
+//            contentDescription = item.title,
+//            tint = if (selected) {
+//                CineHubRed
+//            } else {
+//                UnselectedIcon
+//            },
+//            modifier = Modifier.size(24.dp)
+//        )
+//    }
+//}

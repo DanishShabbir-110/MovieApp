@@ -1,20 +1,21 @@
 package com.danish.navigation
 
-import androidx.navigation3.runtime.NavBackStack
+import androidx.compose.runtime.mutableStateListOf
 import androidx.navigation3.runtime.NavKey
 
 class Navigator(navKey: NavKey) {
-    val backStack=mutableListOf(navKey)
+    val backStack = mutableStateListOf(navKey)
 
-    fun navigateTo(key:NavKey){
+    fun navigateTo(key: NavKey) {
         backStack.add(key)
     }
 
-    fun navigateBack(key: NavKey?){
-        if(key==null||backStack.lastOrNull()==null) backStack.removeLastOrNull()
+    fun navigateBack(key: NavKey?) {
+        if(backStack.size <= 1) return
+        if (key == null || backStack.lastOrNull() == null) backStack.removeLastOrNull()
     }
 
-    fun popAndNavigate(navKey: NavKey){
+    fun popAndNavigate(navKey: NavKey) {
         backStack.removeLastOrNull()
         backStack.add(navKey)
     }
@@ -42,7 +43,7 @@ class Navigator(navKey: NavKey) {
         }
     }
 
-    fun navigateAndPopStack(key: NavKey){
+    fun navigateAndPopStack(key: NavKey) {
         backStack.clear()
         backStack.add(key)
     }
