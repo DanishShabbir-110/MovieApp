@@ -24,6 +24,9 @@
             <option value="$PROJECT_DIR$/feature/main" />
             <option value="$PROJECT_DIR$/feature/main/main-api" />
             <option value="$PROJECT_DIR$/feature/main/main-impl" />
+            <option value="$PROJECT_DIR$/feature/moviedetail" />
+            <option value="$PROJECT_DIR$/feature/moviedetail/detail-api" />
+            <option value="$PROJECT_DIR$/feature/moviedetail/detail-impl" />
             <option value="$PROJECT_DIR$/feature/search" />
             <option value="$PROJECT_DIR$/feature/search/search-api" />
             <option value="$PROJECT_DIR$/feature/search/search-impl" />

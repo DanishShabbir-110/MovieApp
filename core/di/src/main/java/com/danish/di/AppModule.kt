@@ -1,6 +1,7 @@
 package com.danish.di
 
 import com.danish.data.di.dataModule
+import com.danish.detail_impl.di.detailModule
 import com.danish.home_impl.di.homeModule
 import com.danish.network.di.networkModule
 import com.danish.search_impl.di.searchModule
@@ -13,6 +14,7 @@ val appModules = module {
         dataModule,
         homeModule,
         mainModule,
-        searchModule
+        searchModule,
+        detailModule
     )
 }

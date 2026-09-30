@@ -37,4 +37,5 @@ dependencies {
     implementation(projects.feature.home.homeImpl)
     implementation(projects.feature.main.mainImpl)
     implementation(projects.feature.search.searchImpl)
+    implementation(projects.feature.moviedetail.detailImpl)
 }

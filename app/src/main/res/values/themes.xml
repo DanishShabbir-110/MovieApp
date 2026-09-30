@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.MovieApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style
+        name="Theme.MovieApp" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/movieApp_splash_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <!-- Splash Theme -->
+    <style
+        name="Theme.MovieApp.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/movieApp_splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
+        <item name="postSplashScreenTheme">@style/Theme.MovieApp</item>
+    </style>
 </resources>

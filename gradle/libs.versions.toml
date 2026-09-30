@@ -31,6 +31,7 @@ uiGraphics = "1.11.3"
 secretsPlugin = "2.0.1"
 paging = "3.3.6"
 coil = "3.3.0"
+coreSplashscreen = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -78,6 +79,7 @@ androidx-paging-compose = { module = "androidx.paging:paging-compose", version.r
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

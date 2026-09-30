@@ -1,7 +1,9 @@
 package com.danish.data.remote.api
 
+import com.danish.data.remote.dto.MovieDetailDto
 import com.danish.data.remote.dto.MovieResponseDto
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApi {
@@ -25,4 +27,11 @@ interface MovieApi {
         @Query("page") page: Int,
         @Query("language") language: String = "en-US"
     ): MovieResponseDto
+
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "en-US"
+    ): MovieDetailDto
 }

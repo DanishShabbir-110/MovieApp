@@ -1,20 +1,21 @@
 package com.danish.home_impl.presentation.components
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +28,7 @@ private const val AUTO_SCROLL_DELAY = 5_000L
 private const val HERO_MOVIE_COUNT = 4
 
 private val CineHubRed = Color(0xFFFF3158)
-private val IndicatorInactive = Color(0xFF53606B)
+private val IndicatorInactive = Color(0xFF323B44)
 
 @Composable
 fun HeroCarousel(
@@ -49,11 +50,9 @@ fun HeroCarousel(
         }
 
         while (true) {
-            delay(AUTO_SCROLL_DELAY)
+            delay(AUTO_SCROLL_DELAY.milliseconds)
 
-            val nextPage =
-                (pagerState.currentPage + 1) % heroMovies.size
-
+            val nextPage = (pagerState.currentPage + 1) % heroMovies.size
             pagerState.animateScrollToPage(nextPage)
         }
     }
@@ -61,12 +60,10 @@ fun HeroCarousel(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxWidth()
         ) { page ->
-
             val movie = heroMovies[page]
 
             HeroMovieCard(
@@ -79,7 +76,7 @@ fun HeroCarousel(
                 onClick = {
                     onMovieClick(movie.id)
                 },
-                modifier = Modifier.padding(horizontal = 14.dp)
+                modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
 
@@ -87,31 +84,24 @@ fun HeroCarousel(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 9.dp),
+                    .padding(top = 12.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 repeat(heroMovies.size) { index ->
+                    val isSelected = index == pagerState.currentPage
+                    val width by animateDpAsState(
+                        targetValue = if (isSelected) 22.dp else 7.dp,
+                        label = "indicatorWidth"
+                    )
 
                     Box(
                         modifier = Modifier
                             .padding(horizontal = 3.dp)
-                            .size(
-                                if (index == pagerState.currentPage) {
-                                    7.dp
-                                } else {
-                                    6.dp
-                                }
-                            )
+                            .width(width)
+                            .height(7.dp)
                             .background(
-                                color = if (
-                                    index == pagerState.currentPage
-                                ) {
-                                    CineHubRed
-                                } else {
-                                    IndicatorInactive
-                                },
+                                color = if (isSelected) CineHubRed else IndicatorInactive,
                                 shape = CircleShape
                             )
                     )

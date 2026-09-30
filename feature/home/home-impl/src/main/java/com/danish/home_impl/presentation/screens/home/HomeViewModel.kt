@@ -14,29 +14,30 @@ import kotlinx.coroutines.launch
 class HomeViewModel(private val repository: MovieRepository) :
     BaseViewModel<HomeState, HomeEffect, HomeEvent>(HomeState()) {
 
-    val popularMovies=repository.getPopularMovies().cachedIn(viewModelScope)
+    val popularMovies = repository.getPopularMovies().cachedIn(viewModelScope)
+
     init {
         getTrendingMovies()
     }
 
     private fun getTrendingMovies() {
-        viewModelScope.launch{
+        viewModelScope.launch {
             updateState {
-                copy(isLoading = true,errorMessage = null)
+                copy(isLoading = true, errorMessage = null)
             }
             repository.getTrendingMovies().catch { exception ->
                 updateState {
                     copy(
                         isLoading = false,
-                        errorMessage = exception.message?: "Unable to load trending movies"
+                        errorMessage = exception.message ?: "Unable to load trending movies"
                     )
                 }
-            }.collect {movies ->
+            }.collect { movies ->
                 updateState {
                     copy(
-                        isLoading=false,
+                        isLoading = false,
                         errorMessage = null,
-                        trendingMovies=movies
+                        trendingMovies = movies
                     )
                 }
             }
@@ -44,10 +45,11 @@ class HomeViewModel(private val repository: MovieRepository) :
     }
 
     override fun onEvent(event: HomeEvent) {
-        when(event){
-            is HomeEvent.MovieClicked ->{
-
+        when (event) {
+            is HomeEvent.MovieClicked -> {
+                emitEffects(HomeEffect.OpenMovieDetail(movieId = event.movieId))
             }
+
             HomeEvent.RetryTrending -> getTrendingMovies()
         }
     }
@@ -65,4 +67,6 @@ sealed interface HomeEvent : BaseEvents {
     data object RetryTrending : HomeEvent
 }
 
-sealed interface HomeEffect : BaseEffects
+sealed interface HomeEffect : BaseEffects {
+    data class OpenMovieDetail(val movieId: Int) : HomeEffect
+}

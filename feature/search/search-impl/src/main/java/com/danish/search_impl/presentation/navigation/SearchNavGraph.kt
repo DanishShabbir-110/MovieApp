@@ -5,6 +5,6 @@ import androidx.navigation3.runtime.NavKey
 import com.danish.navigation.Navigator
 import com.danish.search_impl.presentation.screens.searchEntry
 
-fun EntryProviderScope<NavKey>.addSearchScreen(navigator: Navigator) {
-    searchEntry(navigator = navigator)
+fun EntryProviderScope<NavKey>.addSearchScreen(navigator: Navigator, onMovieClick: (Int) -> Unit) {
+    searchEntry(navigator = navigator,onMovieClick=onMovieClick)
 }

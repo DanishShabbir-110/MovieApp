@@ -59,7 +59,7 @@ dependencies {
     implementation(projects.feature.home.homeApi)
     implementation(projects.domain)
     implementation(projects.feature.search.searchApi)
-
+    implementation(projects.feature.moviedetail.detailApi)
     //Paging 3
     implementation(libs.androidx.paging.compose)
 

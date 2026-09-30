@@ -10,10 +10,18 @@ class SearchFeatureApiImpl : SearchFeatureApi {
         return SearchRoutes.Search
     }
 
+    override fun searchEntryProvider(
+        navigator: Navigator,
+        provider: EntryProviderScope<NavKey>,
+        onMovieClick: (Int) -> Unit
+    ) {
+        provider.addSearchScreen(navigator = navigator, onMovieClick = onMovieClick)
+    }
+
     override fun entryProvider(
         navigator: Navigator,
         provider: EntryProviderScope<NavKey>
     ) {
-        provider.addSearchScreen(navigator = navigator)
+        provider.addSearchScreen(navigator = navigator, onMovieClick = {})
     }
 }

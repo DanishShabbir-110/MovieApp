@@ -10,10 +10,18 @@ class HomeFeatureApiImpl() : HomeFeatureApi {
         return HomeRoutes.Home
     }
 
+    override fun homeEntryProvider(
+        navigator: Navigator,
+        provider: EntryProviderScope<NavKey>,
+        onMovieClick: (Int) -> Unit
+    ) {
+        provider.addHomeScreen(navigator = navigator, onMovieClick = onMovieClick)
+    }
+
     override fun entryProvider(
         navigator: Navigator,
         provider: EntryProviderScope<NavKey>
     ) {
-        provider.addHomeScreen(navigator)
+        provider.addHomeScreen(navigator, onMovieClick = {})
     }
 }

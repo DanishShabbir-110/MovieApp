@@ -9,6 +9,6 @@ import com.example.main_impl.presentation.screen.main.MainScreen
 
 fun EntryProviderScope<NavKey>.mainEntry(navigator: Navigator){
     entry<MainRoutes.Main>{
-        MainScreen()
+        MainScreen(rootNavigator = navigator)
     }
 }

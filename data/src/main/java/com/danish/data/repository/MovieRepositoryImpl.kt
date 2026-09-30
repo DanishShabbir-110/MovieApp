@@ -8,6 +8,7 @@ import com.danish.data.paging.SearchMoviesPagingSource
 import com.danish.data.remote.api.MovieApi
 import com.danish.data.remote.dto.toDomain
 import com.danish.domain.model.Movie
+import com.danish.domain.model.MovieDetail
 import com.danish.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -52,6 +53,13 @@ class MovieRepositoryImpl(
                 )
             }
         ).flow
+    }
+
+    override fun getMovieDetails(movieId: Int): Flow<MovieDetail> {
+        return flow{
+            val response=movieApi.getMovieDetails(movieId = movieId, apiKey = apiKey)
+            emit(response.toDomain())
+        }
     }
 
     private companion object {

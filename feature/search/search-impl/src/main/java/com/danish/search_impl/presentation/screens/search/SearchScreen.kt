@@ -37,14 +37,16 @@ fun SearchScreen(
     effects: Flow<SearchEffect>,
     baseEffects: Flow<BaseEffectsOfBaseViewModel>,
     onEvent: (SearchEvent) -> Unit,
-    navigator: Navigator
+    navigator: Navigator,
+    onEffect: suspend (SearchEffect)-> Unit
 ) {
     BaseScreen(
         state = state,
         effects = effects,
         baseEffects = baseEffects,
         onEvent = onEvent,
-        navigator = navigator
+        navigator = navigator,
+        onEffect = onEffect
     ) { uiState, event ->
 
         Column(

@@ -7,11 +7,12 @@ import androidx.navigation3.runtime.NavKey
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.danish.navigation.Navigator
 import com.danish.search_impl.presentation.navigation.SearchRoutes
+import com.danish.search_impl.presentation.screens.search.SearchEffect
 import com.danish.search_impl.presentation.screens.search.SearchScreen
 import com.danish.search_impl.presentation.screens.search.SearchViewModel
 import org.koin.androidx.compose.koinViewModel
 
-fun EntryProviderScope<NavKey>.searchEntry(navigator: Navigator) {
+fun EntryProviderScope<NavKey>.searchEntry(navigator: Navigator,onMovieClick: (Int) -> Unit) {
     entry<SearchRoutes.Search> {
         val viewModel: SearchViewModel = koinViewModel()
         val searchState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -24,7 +25,14 @@ fun EntryProviderScope<NavKey>.searchEntry(navigator: Navigator) {
             effects = viewModel.effects,
             baseEffects = viewModel.baseEffects,
             onEvent = viewModel::onEvent,
-            navigator = navigator
+            navigator = navigator,
+            onEffect = {effect ->
+                when(effect){
+                    is SearchEffect.OpenMovieDetail ->{
+                        onMovieClick(effect.movieId)
+                    }
+                }
+            }
         )
     }
 }

@@ -36,7 +36,9 @@ class SearchViewModel(
 
     override fun onEvent(event: SearchEvent) {
         when (event) {
-            is SearchEvent.MovieClicked -> {}
+            is SearchEvent.MovieClicked -> {
+                emitEffects(SearchEffect.OpenMovieDetail(event.movieId))
+            }
             is SearchEvent.QueryChanged -> {
                 updateState { copy(query = event.query) }
                 searchQuery.value = event.query
@@ -57,4 +59,6 @@ sealed interface SearchEvent : BaseEvents {
     data class MovieClicked(val movieId: Int) : SearchEvent
 }
 
-sealed interface SearchEffect : BaseEffects
+sealed interface SearchEffect : BaseEffects{
+    data class OpenMovieDetail(val movieId: Int) : SearchEffect
+}

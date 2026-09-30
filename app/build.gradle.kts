@@ -59,10 +59,13 @@ dependencies {
     //Modules
     implementation(projects.core.di)
     implementation(projects.core.navigation)
-    implementation(projects.feature.home.homeApi)
     implementation(projects.feature.main.mainApi)
+    implementation(projects.feature.moviedetail.detailApi)
 
     // Navigation 3
     implementation(libs.navigation3.runtime)
     implementation(libs.navigation3.ui)
+
+    //Splash API
+    implementation(libs.androidx.core.splashscreen)
 }
