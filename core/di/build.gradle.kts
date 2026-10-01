@@ -38,4 +38,6 @@ dependencies {
     implementation(projects.feature.main.mainImpl)
     implementation(projects.feature.search.searchImpl)
     implementation(projects.feature.moviedetail.detailImpl)
+    implementation(projects.feature.onboarding.onboardingImpl)
+    implementation(projects.core.chache.datastore)
 }

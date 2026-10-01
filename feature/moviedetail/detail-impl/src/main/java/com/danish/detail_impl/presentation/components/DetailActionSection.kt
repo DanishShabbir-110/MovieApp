@@ -28,7 +28,6 @@ private val CineHubRed = Color(0xFFFF3158)
 @Composable
 fun DetailActionSection(
     onWebsiteClick: () -> Unit,
-    onShareClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -47,24 +46,6 @@ fun DetailActionSection(
             onClick = onWebsiteClick,
             containerColor = CineHubRed,
             border = null,
-            modifier = Modifier.weight(1f)
-        )
-
-        ActionButton(
-            title = "Share",
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.Share,
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            },
-            onClick = onShareClick,
-            containerColor = Color(0xFF151C23),
-            border = BorderStroke(
-                width = 1.dp,
-                color = Color.White.copy(alpha = 0.12f)
-            ),
             modifier = Modifier.weight(1f)
         )
     }

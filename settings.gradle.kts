@@ -39,3 +39,7 @@ include(":feature:search:search-api")
 include(":feature:search:search-impl")
 include(":feature:moviedetail:detail-api")
 include(":feature:moviedetail:detail-impl")
+include(":feature:onboarding:onboarding-api")
+include(":feature:onboarding:onboarding-impl")
+
+include(":core:chache:datastore")

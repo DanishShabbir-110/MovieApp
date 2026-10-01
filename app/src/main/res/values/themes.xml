@@ -12,7 +12,7 @@
     <!-- Splash Theme -->
     <style
         name="Theme.MovieApp.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/movieApp_splash_background</item>
+        <item name="windowSplashScreenBackground">#B38888</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen</item>
         <item name="postSplashScreenTheme">@style/Theme.MovieApp</item>
     </style>

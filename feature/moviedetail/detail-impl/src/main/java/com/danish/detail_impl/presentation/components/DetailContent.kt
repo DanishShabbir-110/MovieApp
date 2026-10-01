@@ -20,8 +20,7 @@ fun DetailContent(
                 },
                 onWebsiteClick = {
                     onEvent(DetailEvent.WebsiteClicked)
-                },
-                onShareClick = {}
+                }
             )
         }
 

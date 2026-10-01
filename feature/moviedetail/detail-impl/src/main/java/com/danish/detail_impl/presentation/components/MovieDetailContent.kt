@@ -17,8 +17,7 @@ import com.danish.domain.model.MovieDetail
 fun MovieDetailContent(
     movie: MovieDetail,
     onBackClick: () -> Unit,
-    onWebsiteClick: () -> Unit,
-    onShareClick: () -> Unit
+    onWebsiteClick: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -37,7 +36,6 @@ fun MovieDetailContent(
         item {
             DetailActionSection(
                 onWebsiteClick = onWebsiteClick,
-                onShareClick = onShareClick,
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
         }
