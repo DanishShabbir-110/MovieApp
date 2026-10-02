@@ -5,11 +5,11 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.danish.data.paging.PopularMoviesPagingSource
 import com.danish.data.paging.SearchMoviesPagingSource
-import com.danish.data.remote.api.MovieApi
-import com.danish.data.remote.dto.toDomain
 import com.danish.domain.model.Movie
 import com.danish.domain.model.MovieDetail
 import com.danish.domain.repository.MovieRepository
+import com.danish.network.api.MovieApi
+import com.danish.network.dto.toDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -24,7 +24,7 @@ class MovieRepositoryImpl(
         }
     }
 
-    override fun getPopularMovies():Flow<PagingData<Movie>> {
+    override fun getPopularMovies(): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
@@ -33,7 +33,7 @@ class MovieRepositoryImpl(
             pagingSourceFactory = {
                 PopularMoviesPagingSource(
                     movieApi = movieApi,
-                    apiKey=apiKey
+                    apiKey = apiKey
                 )
             }
         ).flow
@@ -56,8 +56,8 @@ class MovieRepositoryImpl(
     }
 
     override fun getMovieDetails(movieId: Int): Flow<MovieDetail> {
-        return flow{
-            val response=movieApi.getMovieDetails(movieId = movieId, apiKey = apiKey)
+        return flow {
+            val response = movieApi.getMovieDetails(movieId = movieId, apiKey = apiKey)
             emit(response.toDomain())
         }
     }

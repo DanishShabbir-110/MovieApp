@@ -2,9 +2,9 @@ package com.danish.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.danish.data.remote.api.MovieApi
-import com.danish.data.remote.dto.toDomain
 import com.danish.domain.model.Movie
+import com.danish.network.api.MovieApi
+import com.danish.network.dto.toDomain
 
 class SearchMoviesPagingSource(
     private val movieApi: MovieApi,
@@ -36,11 +36,12 @@ class SearchMoviesPagingSource(
                 prevKey = if (page == STARTING_PAGE) null else page - 1,
                 nextKey = if (movies.isEmpty() || page >= response.totalPages) null else page + 1
             )
-        }catch (e: Exception){
+        } catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
-    private companion object{
+
+    private companion object {
         const val STARTING_PAGE = 1
     }
 }
