@@ -11,16 +11,15 @@ import com.danish.domain.repository.MovieRepository
 import com.danish.network.api.MovieApi
 import com.danish.network.dto.toDomain
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 class MovieRepositoryImpl(
     private val movieApi: MovieApi,
     private val apiKey: String
 ) : MovieRepository {
-    override fun getTrendingMovies(): Flow<List<Movie>> {
-        return flow {
-            val response = movieApi.getTrendingMovies(apiKey = apiKey)
-            emit(response.results.map { movieDto -> movieDto.toDomain() })
+    override suspend fun getTrendingMovies(): List<Movie> {
+        val response = movieApi.getTrendingMovies(apiKey = apiKey)
+        return response.results.map { movieDto ->
+            movieDto.toDomain()
         }
     }
 
@@ -55,11 +54,9 @@ class MovieRepositoryImpl(
         ).flow
     }
 
-    override fun getMovieDetails(movieId: Int): Flow<MovieDetail> {
-        return flow {
-            val response = movieApi.getMovieDetails(movieId = movieId, apiKey = apiKey)
-            emit(response.toDomain())
-        }
+    override suspend fun getMovieDetails(movieId: Int): MovieDetail {
+        val response = movieApi.getMovieDetails(movieId = movieId, apiKey = apiKey)
+        return response.toDomain()
     }
 
     private companion object {

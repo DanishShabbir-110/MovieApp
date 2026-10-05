@@ -8,7 +8,6 @@ import com.danish.shared.base.BaseEffects
 import com.danish.shared.base.BaseEvents
 import com.danish.shared.base.BaseStates
 import com.danish.shared.base.BaseViewModel
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: MovieRepository) :
@@ -25,19 +24,20 @@ class HomeViewModel(private val repository: MovieRepository) :
             updateState {
                 copy(isLoading = true, errorMessage = null)
             }
-            repository.getTrendingMovies().catch { exception ->
-                updateState {
-                    copy(
-                        isLoading = false,
-                        errorMessage = exception.message ?: "Unable to load trending movies"
-                    )
-                }
-            }.collect { movies ->
+            try {
+                val movies = repository.getTrendingMovies()
                 updateState {
                     copy(
                         isLoading = false,
                         errorMessage = null,
                         trendingMovies = movies
+                    )
+                }
+            } catch (ex: Exception) {
+                updateState {
+                    copy(
+                        isLoading = false,
+                        errorMessage = ex.message ?: "Unable to load trending movies"
                     )
                 }
             }

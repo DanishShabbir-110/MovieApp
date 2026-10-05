@@ -14,7 +14,7 @@ class MovieApiImpl(private val client: HttpClient) : MovieApi {
         language: String
     ): MovieResponseDto {
         return requestMoviePage(
-            endpoint = GET_POPULAR_MOVIES,
+            endpoint = GET_POPULAR_MOVIES_ENDPOINT,
             language = language,
             page = page,
             apiKey = apiKey
@@ -26,7 +26,7 @@ class MovieApiImpl(private val client: HttpClient) : MovieApi {
         language: String
     ): MovieResponseDto {
         return requestMoviePage(
-            endpoint = GET_TRENDING_MOVIES,
+            endpoint = GET_TRENDING_MOVIES_ENDPOINT,
             language = language,
             apiKey = apiKey
         )
@@ -48,7 +48,7 @@ class MovieApiImpl(private val client: HttpClient) : MovieApi {
         require(apiKey.isNotBlank()) {
             "Api key must not be blank"
         }
-        return client.get(GET_SEARCH_MOVIES) {
+        return client.get(GET_SEARCH_MOVIES_ENDPOINT) {
             parameter(API_KEY_QUERY_PARAMETER, apiKey)
             parameter(SEARCH_QUERY_PARAMETER, searchQuery)
             parameter(PAGE_QUERY_PARAMETER, page)
@@ -67,7 +67,7 @@ class MovieApiImpl(private val client: HttpClient) : MovieApi {
         require(apiKey.isNotBlank()) {
             "Api key must not be blank"
         }
-        return client.get("$GET_MOVIE_DETAILS/$movieId") {
+        return client.get("$GET_MOVIE_DETAILS_ENDPOINT/$movieId") {
             parameter(API_KEY_QUERY_PARAMETER, apiKey)
             parameter(LANGUAGE_QUERY_PARAMETER, language)
         }.body()
@@ -107,10 +107,10 @@ class MovieApiImpl(private val client: HttpClient) : MovieApi {
     }
 
     private companion object {
-        const val GET_POPULAR_MOVIES = "movie/popular"
-        const val GET_TRENDING_MOVIES = "trending/movie/day"
-        const val GET_SEARCH_MOVIES = "search/movie"
-        const val GET_MOVIE_DETAILS = "movie"
+        const val GET_POPULAR_MOVIES_ENDPOINT = "movie/popular"
+        const val GET_TRENDING_MOVIES_ENDPOINT = "trending/movie/day"
+        const val GET_SEARCH_MOVIES_ENDPOINT = "search/movie"
+        const val GET_MOVIE_DETAILS_ENDPOINT = "movie"
         const val LANGUAGE_QUERY_PARAMETER = "language"
         const val PAGE_QUERY_PARAMETER = "page"
         const val API_KEY_QUERY_PARAMETER = "api_key"

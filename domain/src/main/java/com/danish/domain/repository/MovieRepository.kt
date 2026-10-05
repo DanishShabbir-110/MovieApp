@@ -6,8 +6,8 @@ import com.danish.domain.model.MovieDetail
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-    fun getTrendingMovies(): Flow<List<Movie>>
+    suspend fun getTrendingMovies(): List<Movie>
     fun getPopularMovies(): Flow<PagingData<Movie>>
     fun searchMovies(query: String): Flow<PagingData<Movie>>
-    fun getMovieDetails(movieId: Int): Flow<MovieDetail>
+    suspend fun getMovieDetails(movieId: Int): MovieDetail
 }

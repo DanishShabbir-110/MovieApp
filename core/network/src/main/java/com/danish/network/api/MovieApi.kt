@@ -5,18 +5,18 @@ import com.danish.network.dto.MovieResponseDto
 
 interface MovieApi {
     suspend fun getPopularMovies(
-        apiKey: String,
+        apiKey: String=API_KEY,
         page: Int = DEFAULT_PAGE,
         language: String = DEFAULT_LANGUAGE
     ): MovieResponseDto
 
     suspend fun getTrendingMovies(
-        apiKey: String,
+        apiKey: String=API_KEY,
         language: String = DEFAULT_LANGUAGE
     ): MovieResponseDto
 
     suspend fun searchMovies(
-        apiKey: String,
+        apiKey: String=API_KEY,
         query: String,
         page: Int = DEFAULT_PAGE,
         language: String = DEFAULT_LANGUAGE
@@ -24,12 +24,13 @@ interface MovieApi {
 
     suspend fun getMovieDetails(
         movieId: Int,
-        apiKey: String,
+        apiKey: String=API_KEY,
         language: String = DEFAULT_LANGUAGE
     ): MovieDetailDto
 
     private companion object {
         const val DEFAULT_PAGE = 1
         const val DEFAULT_LANGUAGE = "en-US"
+        const val API_KEY= "api_key"
     }
 }

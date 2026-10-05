@@ -39,5 +39,5 @@ dependencies {
     implementation(projects.feature.search.searchImpl)
     implementation(projects.feature.moviedetail.detailImpl)
     implementation(projects.feature.onboarding.onboardingImpl)
-    implementation(projects.core.chache.datastore)
+    implementation(projects.core.cache.datastore)
 }

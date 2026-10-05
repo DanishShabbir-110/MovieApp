@@ -7,7 +7,6 @@ import com.danish.shared.base.BaseEffects
 import com.danish.shared.base.BaseEvents
 import com.danish.shared.base.BaseStates
 import com.danish.shared.base.BaseViewModel
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel(
@@ -26,19 +25,20 @@ class MovieDetailViewModel(
                     errorMessage = null
                 )
             }
-            movieRepository.getMovieDetails(movieId).catch { exception ->
-                updateState {
-                    copy(
-                        isLoading = false,
-                        errorMessage = exception.message ?: "Unable to load movie details"
-                    )
-                }
-            }.collect { movie ->
+            try {
+                val movie = movieRepository.getMovieDetails(movieId = movieId)
                 updateState {
                     copy(
                         isLoading = false,
                         movie = movie,
                         errorMessage = null
+                    )
+                }
+            } catch (ex: Exception) {
+                updateState {
+                    copy(
+                        isLoading = false,
+                        errorMessage = ex.message ?: "Unable to load movie details"
                     )
                 }
             }
@@ -56,7 +56,7 @@ class MovieDetailViewModel(
             }
 
             DetailEvent.WebsiteClicked -> {
-                val homePage= uiState.value.movie?.homepage
+                val homePage = uiState.value.movie?.homepage
                 if (!homePage.isNullOrBlank()) {
                     emitEffects(
                         DetailEffect.OpenWebsite(

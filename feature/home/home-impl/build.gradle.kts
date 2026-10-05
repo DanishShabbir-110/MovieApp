@@ -29,10 +29,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
-    //Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.convert.gson)
-
     //Paging 3
     implementation(libs.androidx.paging.compose)
 

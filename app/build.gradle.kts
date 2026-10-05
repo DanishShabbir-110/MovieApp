@@ -62,7 +62,7 @@ dependencies {
     implementation(projects.feature.main.mainApi)
     implementation(projects.feature.moviedetail.detailApi)
     implementation(projects.feature.onboarding.onboardingApi)
-    implementation(projects.core.chache.datastore)
+    implementation(projects.core.cache.datastore)
 
     // Navigation 3
     implementation(libs.navigation3.runtime)

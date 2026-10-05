@@ -10,23 +10,21 @@ import com.danish.shared.base.BaseStates
 import com.danish.shared.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlin.time.Duration.Companion.milliseconds
 
-@OptIn(FlowPreview::class)
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SearchViewModel(
     private val repository: MovieRepository
 ) : BaseViewModel<SearchState, SearchEffect, SearchEvent>(SearchState()) {
-    private val searchQuery = MutableStateFlow("")
-
-    @OptIn(ExperimentalCoroutinesApi::class)
     val searchMovies =
-        searchQuery.debounce(500L.milliseconds).distinctUntilChanged().flatMapLatest { query ->
-            val trimmedQuery = query.trim()
+        uiState.debounce(500L.milliseconds).distinctUntilChanged { old, new ->
+            old.query == new.query
+        }.flatMapLatest { state ->
+            val trimmedQuery = state.query.trim()
             if (trimmedQuery.isBlank()) {
                 flowOf(PagingData.empty())
             } else {
@@ -39,9 +37,9 @@ class SearchViewModel(
             is SearchEvent.MovieClicked -> {
                 emitEffects(SearchEffect.OpenMovieDetail(event.movieId))
             }
+
             is SearchEvent.QueryChanged -> {
                 updateState { copy(query = event.query) }
-                searchQuery.value = event.query
             }
         }
     }
@@ -59,6 +57,6 @@ sealed interface SearchEvent : BaseEvents {
     data class MovieClicked(val movieId: Int) : SearchEvent
 }
 
-sealed interface SearchEffect : BaseEffects{
+sealed interface SearchEffect : BaseEffects {
     data class OpenMovieDetail(val movieId: Int) : SearchEffect
 }

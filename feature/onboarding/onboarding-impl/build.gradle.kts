@@ -29,10 +29,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
-    //Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.convert.gson)
-
     //Paging 3
     implementation(libs.androidx.paging.compose)
 
@@ -66,5 +62,5 @@ dependencies {
     implementation(projects.feature.onboarding.onboardingApi)
     implementation(projects.core.navigation)
     implementation(projects.core.shared)
-    implementation(projects.core.chache.datastore)
+    implementation(projects.core.cache.datastore)
 }

@@ -2,7 +2,9 @@ package com.danish.network.dto
 
 import com.danish.domain.model.Movie
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MovieDto(
     @SerialName("id")
     val id: Int,

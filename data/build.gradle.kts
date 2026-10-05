@@ -39,11 +39,6 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.core.network)
 
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.convert.gson)
-    implementation(libs.okHttp)
-
     //Koin
     implementation(libs.koin.android)
 

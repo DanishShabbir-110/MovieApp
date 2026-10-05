@@ -28,12 +28,10 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
-    //datastore
+    //dataStore
     implementation(libs.androidx.datastore.preferences)
+
     // Koin
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-
-    //Lifecycle
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 }
