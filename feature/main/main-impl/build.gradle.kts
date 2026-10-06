@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.main_impl"
+    namespace = "com.danish.main_impl"
     compileSdk {
         version = release(37)
     }

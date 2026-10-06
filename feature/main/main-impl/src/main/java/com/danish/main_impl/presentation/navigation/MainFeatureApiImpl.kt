@@ -1,4 +1,4 @@
-package com.example.main_impl.presentation.navigation
+package com.danish.main_impl.presentation.navigation
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey

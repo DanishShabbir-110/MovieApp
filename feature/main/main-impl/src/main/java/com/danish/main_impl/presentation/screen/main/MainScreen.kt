@@ -1,4 +1,4 @@
-package com.example.main_impl.presentation.screen.main
+package com.danish.main_impl.presentation.screen.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
@@ -23,8 +23,8 @@ import com.danish.detail_api.MovieDetailFeatureApi
 import com.danish.home_api.HomeFeatureApi
 import com.danish.navigation.Navigator
 import com.danish.search_api.SearchFeatureApi
-import com.example.main_impl.presentation.BottomNavBar
-import com.example.main_impl.presentation.BottomNavItem
+import com.danish.main_impl.presentation.BottomNavBar
+import com.danish.main_impl.presentation.BottomNavItem
 import org.koin.compose.koinInject
 
 @Composable

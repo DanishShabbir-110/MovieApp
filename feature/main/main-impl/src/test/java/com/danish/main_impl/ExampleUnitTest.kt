@@ -1,4 +1,4 @@
-package com.example.main_impl
+package com.danish.main_impl
 
 import org.junit.Test
 

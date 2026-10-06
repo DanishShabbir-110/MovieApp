@@ -1,4 +1,4 @@
-package com.example.main_impl.presentation
+package com.danish.main_impl.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
