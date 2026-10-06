@@ -33,6 +33,10 @@ fun MovieMetadataSection(
     movie: MovieDetail,
     modifier: Modifier = Modifier
 ) {
+    val metadata = buildMetadata(movie)
+
+    if (metadata.isEmpty()) return
+
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
@@ -71,51 +75,16 @@ fun MovieMetadataSection(
             )
         ) {
             Column(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                modifier = Modifier.padding(
+                    horizontal = 16.dp,
+                    vertical = 4.dp
+                )
             ) {
-                var isFirst = true
-
-                if (movie.releaseDate.isNotBlank()) {
+                metadata.forEachIndexed { index, item ->
                     MetadataRow(
-                        title = "Release Date",
-                        value = movie.releaseDate,
-                        showDivider = false
-                    )
-                    isFirst = false
-                }
-
-                movie.runtime?.let { runtime ->
-                    MetadataRow(
-                        title = "Runtime",
-                        value = formatRuntime(runtime),
-                        showDivider = !isFirst
-                    )
-                    isFirst = false
-                }
-
-                if (movie.status.isNotBlank()) {
-                    MetadataRow(
-                        title = "Status",
-                        value = movie.status,
-                        showDivider = !isFirst
-                    )
-                    isFirst = false
-                }
-
-                if (movie.originalLanguage.isNotBlank()) {
-                    MetadataRow(
-                        title = "Language",
-                        value = movie.originalLanguage.uppercase(Locale.ROOT),
-                        showDivider = !isFirst
-                    )
-                    isFirst = false
-                }
-
-                if (movie.voteCount > 0) {
-                    MetadataRow(
-                        title = "Votes",
-                        value = formatVoteCount(movie.voteCount),
-                        showDivider = !isFirst
+                        title = item.title,
+                        value = item.value,
+                        showDivider = index > 0
                     )
                 }
             }
@@ -159,6 +128,60 @@ private fun MetadataRow(
     }
 }
 
+private fun buildMetadata(movie: MovieDetail): List<MetadataItem> {
+    return buildList {
+        if (movie.releaseDate.isNotBlank()) {
+            add(
+                MetadataItem(
+                    title = "Release Date",
+                    value = movie.releaseDate
+                )
+            )
+        }
+
+        movie.runtime?.let { runtime ->
+            add(
+                MetadataItem(
+                    title = "Runtime",
+                    value = formatRuntime(runtime)
+                )
+            )
+        }
+
+        if (movie.status.isNotBlank()) {
+            add(
+                MetadataItem(
+                    title = "Status",
+                    value = movie.status
+                )
+            )
+        }
+
+        if (movie.originalLanguage.isNotBlank()) {
+            add(
+                MetadataItem(
+                    title = "Language",
+                    value = movie.originalLanguage.uppercase(Locale.ROOT)
+                )
+            )
+        }
+
+        if (movie.voteCount > 0) {
+            add(
+                MetadataItem(
+                    title = "Votes",
+                    value = formatVoteCount(movie.voteCount)
+                )
+            )
+        }
+    }
+}
+
+private data class MetadataItem(
+    val title: String,
+    val value: String
+)
+
 private fun formatRuntime(runtime: Int): String {
     val hours = runtime / 60
     val minutes = runtime % 60
@@ -172,19 +195,21 @@ private fun formatRuntime(runtime: Int): String {
 
 private fun formatVoteCount(voteCount: Int): String {
     return when {
-        voteCount >= 1_000_000 ->
+        voteCount >= 1_000_000 -> {
             String.format(
                 Locale.US,
                 "%.1fM",
                 voteCount / 1_000_000.0
             )
+        }
 
-        voteCount >= 1_000 ->
+        voteCount >= 1_000 -> {
             String.format(
                 Locale.US,
                 "%.1fK",
                 voteCount / 1_000.0
             )
+        }
 
         else -> voteCount.toString()
     }
