@@ -25,9 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.danish.domain.model.MovieDetail
 import java.util.Locale
-
-private val CineHubRed = Color(0xFFFF3158)
-
 @Composable
 fun MovieMetadataSection(
     movie: MovieDetail,
@@ -214,3 +211,4 @@ private fun formatVoteCount(voteCount: Int): String {
         else -> voteCount.toString()
     }
 }
+private val CineHubRed = Color(0xFFFF3158)

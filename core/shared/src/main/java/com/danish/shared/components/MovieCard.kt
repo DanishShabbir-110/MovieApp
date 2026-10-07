@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 
-private val RatingYellow = Color(0xFFFFC107)
-
 @SuppressLint("DefaultLocale")
 @Composable
 fun MovieCard(
@@ -77,7 +75,7 @@ fun MovieCard(
                     Icon(
                         imageVector = Icons.Rounded.Star,
                         contentDescription = null,
-                        tint = RatingYellow,
+                        tint = Color(0xFFFFC107),
                         modifier = Modifier.size(11.dp)
                     )
 

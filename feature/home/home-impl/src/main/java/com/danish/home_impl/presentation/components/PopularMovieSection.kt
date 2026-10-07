@@ -29,9 +29,6 @@ import androidx.paging.compose.LazyPagingItems
 import com.danish.domain.model.Movie
 import com.danish.shared.components.MovieCard
 
-private const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500"
-private val CineHubRed = Color(0xFFFF3158)
-
 @Composable
 fun PopularMovieSection(
     movies: LazyPagingItems<Movie>,
@@ -126,3 +123,5 @@ fun PopularMovieSection(
         }
     }
 }
+private const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500"
+private val CineHubRed = Color(0xFFFF3158)

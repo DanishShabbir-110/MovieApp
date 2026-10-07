@@ -23,13 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.danish.domain.model.Movie
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
-
-private const val AUTO_SCROLL_DELAY = 5_000L
-private const val HERO_MOVIE_COUNT = 4
-
-private val CineHubRed = Color(0xFFFF3158)
-private val IndicatorInactive = Color(0xFF323B44)
-
 @Composable
 fun HeroCarousel(
     movies: List<Movie>,
@@ -110,3 +103,7 @@ fun HeroCarousel(
         }
     }
 }
+private const val AUTO_SCROLL_DELAY = 5_000L
+private const val HERO_MOVIE_COUNT = 4
+private val CineHubRed = Color(0xFFFF3158)
+private val IndicatorInactive = Color(0xFF323B44)

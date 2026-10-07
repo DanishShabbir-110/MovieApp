@@ -1,4 +1,4 @@
-package com.danish.main_impl.presentation
+package com.danish.main_impl.presentation.screen.main
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
@@ -172,34 +172,3 @@ private fun BottomBarItem(
         }
     }
 }
-
-//@Composable
-//private fun BottomBarItem(
-//    item: BottomNavItem,
-//    selected: Boolean,
-//    onClick: () -> Unit
-//) {
-//    Row(
-//        modifier = Modifier
-//            .height(52.dp)
-//            .clickable(onClick = onClick)
-//            .padding(horizontal = 16.dp),
-//        verticalAlignment = Alignment.CenterVertically,
-//        horizontalArrangement = Arrangement.Center
-//    ) {
-//        Icon(
-//            imageVector = if (selected) {
-//                item.selectedIcon
-//            } else {
-//                item.unSelectedIcon
-//            },
-//            contentDescription = item.title,
-//            tint = if (selected) {
-//                CineHubRed
-//            } else {
-//                UnselectedIcon
-//            },
-//            modifier = Modifier.size(24.dp)
-//        )
-//    }
-//}

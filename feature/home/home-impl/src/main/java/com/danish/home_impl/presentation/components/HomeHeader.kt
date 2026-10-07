@@ -23,10 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-private val CineHubRed = Color(0xFFFF3158)
-private val SecondaryText = Color(0xFFADB5BD)
-
 @Composable
 fun HomeHeader(
     modifier: Modifier = Modifier
@@ -102,3 +98,5 @@ fun HomeHeader(
         )
     }
 }
+private val CineHubRed = Color(0xFFFF3158)
+private val SecondaryText = Color(0xFFADB5BD)

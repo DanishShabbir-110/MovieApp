@@ -37,18 +37,6 @@ abstract class BaseViewModel<S : BaseStates, I : BaseEffects, E : BaseEvents>
         }
     }
 
-    protected fun navigateTo(key: NavKey) {
-        emitBaseEffect(
-            BaseEffectsOfBaseViewModel.NavigateTo(key)
-        )
-    }
-
-    protected fun navigateAndPopStack(key: NavKey) {
-        emitBaseEffect(
-            BaseEffectsOfBaseViewModel.NavigateAndPopStack(key)
-        )
-    }
-
     protected fun navigateBack(key: NavKey? = null) {
         emitBaseEffect(
             BaseEffectsOfBaseViewModel.NavigateBack(key)

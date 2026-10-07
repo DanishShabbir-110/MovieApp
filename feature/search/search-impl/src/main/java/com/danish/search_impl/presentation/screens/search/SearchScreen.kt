@@ -24,12 +24,6 @@ import com.danish.shared.base.BaseEffectsOfBaseViewModel
 import com.danish.shared.base.BaseScreen
 import kotlinx.coroutines.flow.Flow
 
-val SearchBackground = Color(0xFF080D12)
-val SearchFieldBackground = Color(0xFF121820)
-val CineHubRed = Color(0xFFFF3158)
-val SecondaryText = Color(0xFFADB5BD)
-val RatingYellow = Color(0xFFFFC107)
-
 @Composable
 fun SearchScreen(
     state: SearchState,
@@ -114,4 +108,8 @@ fun SearchScreen(
         }
     }
 }
-
+val SearchBackground = Color(0xFF080D12)
+val SearchFieldBackground = Color(0xFF121820)
+val CineHubRed = Color(0xFFFF3158)
+val SecondaryText = Color(0xFFADB5BD)
+val RatingYellow = Color(0xFFFFC107)

@@ -19,8 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private val CineHubRed = Color(0xFFFF3158)
-
 @Composable
 fun OverviewSection(
     overview: String,
@@ -63,3 +61,4 @@ fun OverviewSection(
         )
     }
 }
+private val CineHubRed = Color(0xFFFF3158)

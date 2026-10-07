@@ -6,9 +6,7 @@ import com.danish.navigation.FeatureApi
 import com.danish.navigation.Navigator
 
 interface HomeFeatureApi: FeatureApi {
-
     fun homeEntry(): NavKey
-
     fun homeEntryProvider(
         navigator: Navigator,
         provider: EntryProviderScope<NavKey>,

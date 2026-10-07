@@ -32,10 +32,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-
-private val RatingYellow = Color(0xFFFFC107)
-private val CineHubRed = Color(0xFFFF3158)
-
 @SuppressLint("DefaultLocale")
 @Composable
 fun HeroMovieCard(
@@ -160,3 +156,5 @@ fun HeroMovieCard(
         }
     }
 }
+private val RatingYellow = Color(0xFFFFC107)
+private val CineHubRed = Color(0xFFFF3158)

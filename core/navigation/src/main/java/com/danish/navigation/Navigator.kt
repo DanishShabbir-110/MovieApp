@@ -15,34 +15,6 @@ class Navigator(navKey: NavKey) {
         if (key == null || backStack.lastOrNull() == null) backStack.removeLastOrNull()
     }
 
-    fun popAndNavigate(navKey: NavKey) {
-        backStack.removeLastOrNull()
-        backStack.add(navKey)
-    }
-
-    fun navigateAndPopTo(
-        key: NavKey,
-        inclusive: Boolean
-    ) {
-        val destinationIndex = backStack.indexOfLast { it == key }
-
-        if (destinationIndex == -1) return
-
-        val retainedStackSize =
-            if (inclusive) destinationIndex
-            else destinationIndex + 1
-
-        while (backStack.size > retainedStackSize) {
-            backStack.removeLastOrNull()
-        }
-    }
-
-    fun navigateToRoot() {
-        while (backStack.size > 1) {
-            backStack.removeLastOrNull()
-        }
-    }
-
     fun navigateAndPopStack(key: NavKey) {
         backStack.clear()
         backStack.add(key)

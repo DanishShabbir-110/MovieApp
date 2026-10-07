@@ -23,8 +23,6 @@ import com.danish.detail_api.MovieDetailFeatureApi
 import com.danish.home_api.HomeFeatureApi
 import com.danish.navigation.Navigator
 import com.danish.search_api.SearchFeatureApi
-import com.danish.main_impl.presentation.BottomNavBar
-import com.danish.main_impl.presentation.BottomNavItem
 import org.koin.compose.koinInject
 
 @Composable
@@ -35,31 +33,28 @@ fun MainScreen(
     val searchFeatureApi: SearchFeatureApi = koinInject()
     val movieDetailFeatureApi: MovieDetailFeatureApi = koinInject()
 
-    val homeEntry = remember(homeFeatureApi) {
-        homeFeatureApi.homeEntry()
-    }
-
-    val searchEntry = remember(searchFeatureApi) {
-        searchFeatureApi.searchEntry()
-    }
+    val homeEntry = homeFeatureApi.homeEntry()
+    val searchEntry = searchFeatureApi.searchEntry()
 
     var selectedTab by rememberSaveable {
         mutableStateOf(BottomNavItem.HOME)
     }
 
-    val tabNavigator = remember(homeEntry, searchEntry) {
-        Navigator(
-            navKey = when (selectedTab) {
-                BottomNavItem.HOME -> homeEntry
-                BottomNavItem.SEARCH -> searchEntry
-            }
+    val tabNavigator = remember {
+        Navigator(navKey = homeEntry)
+    }
+
+    val onMovieClick: (Int) -> Unit = { movieId ->
+        rootNavigator.navigateTo(
+            movieDetailFeatureApi.movieDetailEntry(
+                movieId = movieId
+            )
         )
     }
 
     val tabEntryProvider = remember(
         homeFeatureApi,
         searchFeatureApi,
-        movieDetailFeatureApi,
         tabNavigator,
         rootNavigator
     ) {
@@ -67,25 +62,13 @@ fun MainScreen(
             homeFeatureApi.homeEntryProvider(
                 navigator = tabNavigator,
                 provider = this,
-                onMovieClick = { movieId ->
-                    rootNavigator.navigateTo(
-                        movieDetailFeatureApi.movieDetailEntry(
-                            movieId = movieId
-                        )
-                    )
-                }
+                onMovieClick = onMovieClick
             )
 
             searchFeatureApi.searchEntryProvider(
                 navigator = tabNavigator,
                 provider = this,
-                onMovieClick = { movieId ->
-                    rootNavigator.navigateTo(
-                        movieDetailFeatureApi.movieDetailEntry(
-                            movieId = movieId
-                        )
-                    )
-                }
+                onMovieClick = onMovieClick
             )
         }
     }
@@ -94,7 +77,6 @@ fun MainScreen(
         enabled = selectedTab == BottomNavItem.SEARCH
     ) {
         selectedTab = BottomNavItem.HOME
-
         tabNavigator.navigateAndPopStack(
             key = homeEntry
         )
@@ -117,26 +99,17 @@ fun MainScreen(
                 BottomNavBar(
                     selectedItem = selectedTab,
                     onItemClick = { item ->
-                        when (item) {
-                            BottomNavItem.HOME -> {
-                                if (selectedTab != BottomNavItem.HOME) {
-                                    selectedTab = BottomNavItem.HOME
+                        if (selectedTab != item) {
+                            selectedTab = item
 
-                                    tabNavigator.navigateAndPopStack(
-                                        key = homeEntry
-                                    )
-                                }
+                            val destination = when (item) {
+                                BottomNavItem.HOME -> homeEntry
+                                BottomNavItem.SEARCH -> searchEntry
                             }
 
-                            BottomNavItem.SEARCH -> {
-                                if (selectedTab != BottomNavItem.SEARCH) {
-                                    selectedTab = BottomNavItem.SEARCH
-
-                                    tabNavigator.navigateAndPopStack(
-                                        key = searchEntry
-                                    )
-                                }
-                            }
+                            tabNavigator.navigateAndPopStack(
+                                key = destination
+                            )
                         }
                     }
                 )
