@@ -52,11 +52,11 @@ data class SearchState(
     val query: String = ""
 ) : BaseStates
 
-sealed interface SearchEvent : BaseEvents {
-    data class QueryChanged(val query: String) : SearchEvent
-    data class MovieClicked(val movieId: Int) : SearchEvent
+sealed class SearchEvent : BaseEvents {
+    data class QueryChanged(val query: String) : SearchEvent()
+    data class MovieClicked(val movieId: Int) : SearchEvent()
 }
 
-sealed interface SearchEffect : BaseEffects {
-    data class OpenMovieDetail(val movieId: Int) : SearchEffect
+sealed class SearchEffect : BaseEffects {
+    data class OpenMovieDetail(val movieId: Int) : SearchEffect()
 }

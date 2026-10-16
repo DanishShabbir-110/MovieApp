@@ -55,9 +55,6 @@ enum class BottomNavItem(
     )
 }
 
-private val CineHubRed = Color(0xFFE63946)
-private val BarBackground = Color(0xCC111318)
-private val UnselectedIcon = Color(0xFF9CA3AD)
 
 @Composable
 fun BottomNavBar(
@@ -172,3 +169,6 @@ private fun BottomBarItem(
         }
     }
 }
+private val CineHubRed = Color(0xFFE63946)
+private val BarBackground = Color(0xCC111318)
+private val UnselectedIcon = Color(0xFF9CA3AD)

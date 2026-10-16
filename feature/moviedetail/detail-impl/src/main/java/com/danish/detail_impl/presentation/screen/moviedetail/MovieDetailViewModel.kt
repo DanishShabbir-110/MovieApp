@@ -77,12 +77,12 @@ data class DetailState(
     override val errorMessage: String? = null
 ) : BaseStates
 
-sealed interface DetailEvent : BaseEvents {
-    data object BackClicked : DetailEvent
-    data object Retry : DetailEvent
-    data object WebsiteClicked : DetailEvent
+sealed class DetailEvent : BaseEvents {
+    data object BackClicked : DetailEvent()
+    data object Retry : DetailEvent()
+    data object WebsiteClicked : DetailEvent()
 }
 
-sealed interface DetailEffect : BaseEffects {
-    data class OpenWebsite(val url: String) : DetailEffect
+sealed class DetailEffect : BaseEffects {
+    data class OpenWebsite(val url: String) : DetailEffect()
 }

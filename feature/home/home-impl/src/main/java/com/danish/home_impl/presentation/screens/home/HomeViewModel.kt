@@ -62,11 +62,11 @@ data class HomeState(
     val trendingMovies: List<Movie> = emptyList()
 ) : BaseStates
 
-sealed interface HomeEvent : BaseEvents {
-    data class MovieClicked(val movieId: Int) : HomeEvent
-    data object RetryTrending : HomeEvent
+sealed class HomeEvent : BaseEvents {
+    data class MovieClicked(val movieId: Int) : HomeEvent()
+    data object RetryTrending : HomeEvent()
 }
 
-sealed interface HomeEffect : BaseEffects {
-    data class OpenMovieDetail(val movieId: Int) : HomeEffect
+sealed class HomeEffect : BaseEffects {
+    data class OpenMovieDetail(val movieId: Int) : HomeEffect()
 }

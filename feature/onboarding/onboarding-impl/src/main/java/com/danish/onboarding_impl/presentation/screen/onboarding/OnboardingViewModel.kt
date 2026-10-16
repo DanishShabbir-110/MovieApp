@@ -45,10 +45,10 @@ data class OnboardingState(
     override val errorMessage: String? = null
 ) : BaseStates
 
-sealed interface OnboardingEvent : BaseEvents {
-    data object Completed : OnboardingEvent
+sealed class OnboardingEvent : BaseEvents {
+    data object Completed : OnboardingEvent()
 }
 
-sealed interface OnboardingEffect : BaseEffects {
-    data object Completed : OnboardingEffect
+sealed class OnboardingEffect : BaseEffects {
+    data object Completed : OnboardingEffect()
 }

@@ -39,9 +39,15 @@ fun MainScreen(
     var selectedTab by rememberSaveable {
         mutableStateOf(BottomNavItem.HOME)
     }
+    val initialRoute =remember {
+        when(selectedTab){
+            BottomNavItem.HOME -> homeEntry
+            BottomNavItem.SEARCH -> searchEntry
+        }
+    }
 
     val tabNavigator = remember {
-        Navigator(navKey = homeEntry)
+        Navigator(navKey = initialRoute)
     }
 
     val onMovieClick: (Int) -> Unit = { movieId ->
