@@ -14,21 +14,18 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
-import kotlin.time.Duration.Companion.milliseconds
+import kotlinx.coroutines.flow.map
 
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SearchViewModel(
     private val repository: MovieRepository
 ) : BaseViewModel<SearchState, SearchEffect, SearchEvent>(SearchState()) {
-    val searchMovies =
-        uiState.debounce(500L.milliseconds).distinctUntilChanged { old, new ->
-            old.query == new.query
-        }.flatMapLatest { state ->
-            val trimmedQuery = state.query.trim()
-            if (trimmedQuery.isBlank()) {
-                flowOf(PagingData.empty())
-            } else {
-                repository.searchMovies(trimmedQuery)
+    val searchMovies = uiState.map { it.query.trim() }.distinctUntilChanged()
+        .debounce { query -> if (query.isBlank()) 0L else 500L }
+        .flatMapLatest { query ->
+            when {
+                query.length < MIN_QUERY_LENGTH -> flowOf(PagingData.empty())
+                else -> repository.searchMovies(query)
             }
         }.cachedIn(viewModelScope)
 
@@ -44,6 +41,9 @@ class SearchViewModel(
         }
     }
 
+    private companion object {
+        const val MIN_QUERY_LENGTH = 2
+    }
 }
 
 data class SearchState(
