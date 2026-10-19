@@ -11,18 +11,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Movie
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.danish.shared.components.AppText
+import com.danish.shared.theme.AppColors
+import com.danish.shared.theme.AppShapes
+import com.danish.shared.theme.AppTextStyles
+
 @Composable
 fun HomeHeader(
     modifier: Modifier = Modifier
@@ -45,15 +47,15 @@ fun HomeHeader(
                 modifier = Modifier
                     .size(40.dp)
                     .background(
-                        color = CineHubRed.copy(alpha = 0.15f),
-                        shape = RoundedCornerShape(12.dp)
+                        color = AppColors.Primary.copy(alpha = 0.15f),
+                        shape = AppShapes.Medium
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Movie,
                     contentDescription = null,
-                    tint = CineHubRed,
+                    tint = AppColors.Primary,
                     modifier = Modifier.size(24.dp)
                 )
             }
@@ -64,26 +66,14 @@ fun HomeHeader(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "Cine",
-                        color = Color.White,
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Text(
-                        text = "Hub",
-                        color = CineHubRed,
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    val logoStyle = AppTextStyles.Title.copy(fontSize = 22.sp)
+                    AppText(text = "Cine", style = logoStyle)
+                    AppText(text = "Hub", style = logoStyle, color = AppColors.Primary)
                 }
-
-                Text(
+                AppText(
                     text = "Discover Movies",
-                    color = SecondaryText,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Medium
+                    style = AppTextStyles.Caption.copy(fontWeight = FontWeight.Medium),
+                    color = AppColors.TextSecondary
                 )
             }
         }
@@ -92,11 +82,9 @@ fun HomeHeader(
             modifier = Modifier
                 .size(10.dp)
                 .background(
-                    color = CineHubRed,
+                    color = AppColors.Primary,
                     shape = CircleShape
                 )
         )
     }
 }
-private val CineHubRed = Color(0xFFFF3158)
-private val SecondaryText = Color(0xFFADB5BD)

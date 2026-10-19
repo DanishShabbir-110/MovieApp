@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.danish.shared.theme.AppColors
 
 enum class BottomNavItem(
     val title: String,
@@ -68,7 +69,7 @@ fun BottomNavBar(
     ) {
         Surface(
             shape = RoundedCornerShape(32.dp),
-            border = BorderStroke(width = 1.dp, color = CineHubRed.copy(alpha = 0.35f)),
+            border = BorderStroke(width = 1.dp, color = AppColors.Primary.copy(alpha = 0.35f)),
             color = BarBackground
         ) {
             Row(
@@ -103,7 +104,7 @@ private fun BottomBarItem(
 
     val backgroundColor by animateColorAsState(
         targetValue = if (selected) {
-            CineHubRed
+            AppColors.Primary
         } else {
             Color.Transparent
         },
@@ -169,6 +170,5 @@ private fun BottomBarItem(
         }
     }
 }
-private val CineHubRed = Color(0xFFE63946)
 private val BarBackground = Color(0xCC111318)
-private val UnselectedIcon = Color(0xFF9CA3AD)
+private val UnselectedIcon = AppColors.TextSecondary

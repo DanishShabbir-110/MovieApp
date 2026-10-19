@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.danish.domain.model.Movie
@@ -19,6 +18,7 @@ import com.danish.home_impl.presentation.components.PopularMovieSection
 import com.danish.navigation.Navigator
 import com.danish.shared.base.BaseEffectsOfBaseViewModel
 import com.danish.shared.base.BaseScreen
+import com.danish.shared.theme.AppColors
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -29,7 +29,7 @@ fun HomeScreen(
     baseEffects: Flow<BaseEffectsOfBaseViewModel>,
     onEvent: (HomeEvent) -> Unit,
     navigator: Navigator,
-    onEffect: suspend (HomeEffect)-> Unit
+    onEffect: suspend (HomeEffect) -> Unit
 ) {
     BaseScreen(
         state = state,
@@ -43,7 +43,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
-                .background(Color(0xFF080D12)),
+                .background(AppColors.Background),
             contentPadding = PaddingValues(top = 8.dp, bottom = 100.dp),
             verticalArrangement = Arrangement.spacedBy(28.dp)
         ) {
