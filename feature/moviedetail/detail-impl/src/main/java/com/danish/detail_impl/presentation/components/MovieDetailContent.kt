@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.danish.domain.model.MovieDetail
+import com.danish.shared.theme.AppColors
 
 @Composable
 fun MovieDetailContent(
@@ -21,7 +21,7 @@ fun MovieDetailContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF080D12)),
+            .background(AppColors.Background),
         contentPadding = PaddingValues(bottom = 40.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
