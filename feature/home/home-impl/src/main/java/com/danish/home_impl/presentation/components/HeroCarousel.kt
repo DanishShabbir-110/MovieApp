@@ -1,28 +1,21 @@
 package com.danish.home_impl.presentation.components
 
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.danish.domain.model.Movie
+import com.danish.shared.components.PageIndicator
+import com.danish.shared.util.MovieImageSize
+import com.danish.shared.util.movieImageUrl
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
+
 @Composable
 fun HeroCarousel(
     movies: List<Movie>,
@@ -62,9 +55,7 @@ fun HeroCarousel(
             HeroMovieCard(
                 title = movie.title,
                 overview = movie.overview,
-                backdropUrl = movie.backdropPath?.let {
-                    "https://image.tmdb.org/t/p/w780$it"
-                },
+                backdropUrl = movieImageUrl(movie.backdropPath, MovieImageSize.W780),
                 rating = movie.rating,
                 onClick = {
                     onMovieClick(movie.id)
@@ -74,36 +65,16 @@ fun HeroCarousel(
         }
 
         if (heroMovies.size > 1) {
-            Row(
+            PageIndicator(
+                pageCount = heroMovies.size,
+                currentPage = pagerState.currentPage,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                repeat(heroMovies.size) { index ->
-                    val isSelected = index == pagerState.currentPage
-                    val width by animateDpAsState(
-                        targetValue = if (isSelected) 22.dp else 7.dp,
-                        label = "indicatorWidth"
-                    )
-
-                    Box(
-                        modifier = Modifier
-                            .padding(horizontal = 3.dp)
-                            .width(width)
-                            .height(7.dp)
-                            .background(
-                                color = if (isSelected) CineHubRed else IndicatorInactive,
-                                shape = CircleShape
-                            )
-                    )
-                }
-            }
+                    .padding(top = 12.dp)
+            )
         }
     }
 }
+
 private const val AUTO_SCROLL_DELAY = 5_000L
 private const val HERO_MOVIE_COUNT = 4
-private val CineHubRed = Color(0xFFFF3158)
-private val IndicatorInactive = Color(0xFF323B44)

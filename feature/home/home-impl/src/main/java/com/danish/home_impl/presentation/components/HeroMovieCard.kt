@@ -7,19 +7,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Star
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +26,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.danish.shared.components.AppText
+import com.danish.shared.components.RatingBadge
+import com.danish.shared.components.RatingBadgeSize
+import com.danish.shared.components.TagChip
+import com.danish.shared.theme.AppColors
+import com.danish.shared.theme.AppShapes
+import com.danish.shared.theme.AppTextStyles
+
 @SuppressLint("DefaultLocale")
 @Composable
 fun HeroMovieCard(
@@ -46,10 +48,10 @@ fun HeroMovieCard(
         modifier = modifier
             .fillMaxWidth()
             .height(230.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(AppShapes.ExtraLarge)
             .border(
-                border = BorderStroke(1.dp, Color(0xFF1E2630)),
-                shape = RoundedCornerShape(20.dp)
+                border = BorderStroke(1.dp, AppColors.Border),
+                shape = AppShapes.ExtraLarge
             )
             .clickable(onClick = onClick)
     ) {
@@ -66,89 +68,56 @@ fun HeroMovieCard(
                 .background(
                     Brush.verticalGradient(
                         0.15f to Color.Transparent,
-                        0.55f to Color(0x66080D12),
-                        1.00f to Color(0xFB080D12)
+                        0.55f to AppColors.Background.copy(alpha = 0.4f),
+                        1.00f to AppColors.Background.copy(alpha = 0.98f)
                     )
                 )
         )
-
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(14.dp)
-                .background(
-                    color = CineHubRed,
-                    shape = RoundedCornerShape(8.dp)
-                )
-                .padding(horizontal = 10.dp, vertical = 4.dp)
-        ) {
-            Text(
-                text = "FEATURED",
-                color = Color.White,
+        TagChip(
+            text = "FEATURED",
+            containerColor = AppColors.Primary,
+            contentColor = AppColors.OnPrimary,
+            style = AppTextStyles.Label.copy(
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Bold,
                 letterSpacing = 1.sp
-            )
-        }
-
+            ),
+            shape = RoundedCornerShape(8.dp),
+            padding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(14.dp)
+        )
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
                 .padding(16.dp)
         ) {
-            Text(
+            AppText(
                 text = title,
-                color = Color.White,
-                fontSize = 20.sp,
-                lineHeight = 24.sp,
-                fontWeight = FontWeight.Bold,
+                style = AppTextStyles.Title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(Modifier.height(6.dp))
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .background(
-                            color = Color(0x99000000),
-                            shape = RoundedCornerShape(6.dp)
-                        )
-                        .padding(horizontal = 8.dp, vertical = 3.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Rounded.Star,
-                            contentDescription = null,
-                            tint = RatingYellow,
-                            modifier = Modifier.size(13.dp)
-                        )
-
-                        Spacer(modifier = Modifier.width(4.dp))
-
-                        Text(
-                            text = String.format("%.1f", rating),
-                            color = Color.White,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-            }
+            RatingBadge(
+                rating = rating,
+                size = RatingBadgeSize.Medium,
+                background = AppColors.Scrim
+            )
 
             if (overview.isNotBlank()) {
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(Modifier.height(6.dp))
 
-                Text(
+                AppText(
                     text = overview,
+                    style = AppTextStyles.Label.copy(
+                        fontWeight = FontWeight.Normal,
+                        lineHeight = 15.sp
+                    ),
                     color = Color.White.copy(alpha = 0.80f),
-                    fontSize = 11.sp,
-                    lineHeight = 15.sp,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -156,5 +125,3 @@ fun HeroMovieCard(
         }
     }
 }
-private val RatingYellow = Color(0xFFFFC107)
-private val CineHubRed = Color(0xFFFF3158)

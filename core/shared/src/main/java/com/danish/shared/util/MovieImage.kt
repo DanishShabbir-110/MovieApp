@@ -6,3 +6,6 @@ enum class MovieImageSize(val path:String){
     W780("w780"),
     Original("original")
 }
+
+fun movieImageUrl(path: String?, size: MovieImageSize = MovieImageSize.W500): String? =
+    path?.let { "https://image.tmdb.org/t/p/${size.path}$it" }
