@@ -1,4 +1,4 @@
-package com.danish.shared.themes
+package com.danish.shared.theme
 
 import androidx.compose.ui.graphics.Color
 

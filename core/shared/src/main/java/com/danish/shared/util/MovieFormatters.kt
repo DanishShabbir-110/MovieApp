@@ -35,3 +35,5 @@ fun formatVoteCount(voteCount: Int): String {
 }
 fun releaseYear(releaseDate: String): String =
     if (releaseDate.length >= 4) releaseDate.take(4) else ""
+
+fun formatRating(rating: Double): String = String.format(Locale.US, "%.1f", rating)
