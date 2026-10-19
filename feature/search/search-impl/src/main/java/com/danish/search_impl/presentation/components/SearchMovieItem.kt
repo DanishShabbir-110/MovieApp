@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.danish.domain.model.Movie
-import com.danish.search_impl.presentation.screens.search.SecondaryText
 import com.danish.shared.components.AppText
 import com.danish.shared.components.RatingBadge
 import com.danish.shared.components.RatingBadgeSize
@@ -98,14 +96,6 @@ fun SearchMovieItem(
                     text = movie.overview,
                     style = AppTextStyles.Caption.copy(lineHeight = 16.sp),
                     color = AppColors.TextSecondary,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = movie.overview,
-                    color = SecondaryText,
-                    fontSize = 12.sp,
-                    lineHeight = 16.sp,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )

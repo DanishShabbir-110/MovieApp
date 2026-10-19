@@ -90,8 +90,3 @@ fun SearchScreen(
         }
     }
 }
-
-val SearchFieldBackground = Color(0xFF121820)
-val CineHubRed = Color(0xFFFF3158)
-val SecondaryText = Color(0xFFADB5BD)
-val RatingYellow = Color(0xFFFFC107)
