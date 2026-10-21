@@ -21,6 +21,7 @@ coil = "3.3.0"
 coreSplashscreen = "1.2.0"
 datastore = "1.2.1"
 ktor = "3.6.0"
+fusionInspect = "v2.1.2.68"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -57,6 +58,9 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+
+#Fusion Implement
+fusion-inspect = { module = "com.gitlab.grp-fusionsuite-mobilesdk:fusion-inspect-android-sdk-kotlin-repo-v2", version.ref = "fusionInspect" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

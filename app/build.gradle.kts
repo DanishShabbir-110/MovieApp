@@ -70,4 +70,7 @@ dependencies {
 
     //Splash API
     implementation(libs.androidx.core.splashscreen)
+
+    //Fusion
+    implementation(libs.fusion.inspect)
 }
